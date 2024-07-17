@@ -1,26 +1,31 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { Sequelize, Model } = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'mysql' // o il tuo database
+});
 
-// Definizione del modello Product
-const Product = sequelize.define('Product', {
+class Product extends Model {}
+
+Product.init({
   name: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false
   },
   description: {
-    type: DataTypes.TEXT
+    type: Sequelize.STRING,
+    allowNull: false
   },
   price: {
-    type: DataTypes.FLOAT,
+    type: Sequelize.FLOAT,
     allowNull: false
   },
   categoryId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'Categories',
-      key: 'id'
-    }
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
+}, {
+  sequelize,
+  modelName: 'product'
 });
 
-module.exports = Product;
+module.exports = { Product };

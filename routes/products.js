@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Product } = require('../models/Product');
+const { Product } = require('../models/product');
 const { authenticateToken } = require('../middleware/auth');
 const { getAllProducts } = require('../controllers/products');
 const authMiddleware = require('../middleware/auth');
@@ -9,13 +9,17 @@ const authMiddleware = require('../middleware/auth');
 router.get('/protected', authMiddleware, (req, res) => {
   res.send('This is a protected route');
 });
-// routes/products.js
-router.get('/', authenticateToken, getAllProducts);
-
+// Rotta per ottenere tutti i prodotti, usando authenticateToken come middleware
 router.get('/', async (req, res) => {
-  const products = await Product.findAll();
-  res.send(products);
+  try {
+      const products = await product.findAll();
+      res.send(products);
+  } catch (error) {
+      res.status(500).send('Errore nel recuperare i prodotti');
+  }
 });
+
+
 
 router.get('/:id', async (req, res) => {
   const product = await Product.findByPk(req.params.id);
@@ -23,7 +27,7 @@ router.get('/:id', async (req, res) => {
   res.send(product);
 });
 
-router.post('/', authenticateToken, async (req, res) => {
+router.post('/', async (req, res) => {
   if (!req.user.isAdmin) return res.status(403).send('Access denied');
 
   const product = new Product({
@@ -41,7 +45,7 @@ router.post('/', authenticateToken, async (req, res) => {
   }
 });
 
-router.put('/:id', authenticateToken, async (req, res) => {
+router.put('/:id', async (req, res) => {
   if (!req.user.isAdmin) return res.status(403).send('Access denied');
 
   const product = await Product.findByPk(req.params.id);
@@ -60,7 +64,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
   }
 });
 
-router.delete('/:id', authenticateToken, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   if (!req.user.isAdmin) return res.status(403).send('Access denied');
 
   const product = await Product.findByPk(req.params.id);
