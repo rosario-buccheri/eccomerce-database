@@ -1,0 +1,21 @@
+ecommerce/
+│
+├── .env
+├── package.json
+├── server.js
+├── middleware/
+│   └── auth.js
+├── models/
+│   ├── User.js
+│   ├── Product.js
+│   ├── Category.js
+│   ├── Cart.js
+│   └── Order.js
+├── routes/
+│   ├── auth.js
+│   ├── products.js
+│   ├── categories.js
+│   ├── cart.js
+│   └── orders.js
+└── utils/
+    └── db.js
