@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Order } = require('../models/Order');
-const { Cart } = require('../models/Cart');
-const { Product } = require('../models/Product');
+const { Order } = require('../models/order');
+const { Cart } = require('../models/cart');
+const { Product } = require('../models/product');
 const { authenticateToken } = require('../middleware/auth');
 
 router.get('/', authenticateToken, async (req, res) => {

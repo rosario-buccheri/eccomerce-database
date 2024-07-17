@@ -1,6 +1,6 @@
 // controllers/categories.js
 
-const products = require('../models/products');
+const products = require('../models/product');
 
 exports.getAllProducts = async (req, res) => {
   try {

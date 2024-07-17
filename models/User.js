@@ -1,10 +1,7 @@
 // models/User.js
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-
-class User extends Model {}
-
-User.init({
+const User = sequelize.define('Users',{
   name: {
     type: DataTypes.STRING,
     allowNull: false
@@ -21,11 +18,8 @@ User.init({
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'user'
+    defaultValue:'client'
   }
-}, {
-  sequelize,
-  modelName: 'User'
-});
+}, {freezeTableName:true});
 
 module.exports = User;

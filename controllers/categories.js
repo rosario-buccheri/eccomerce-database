@@ -1,6 +1,6 @@
 // controllers/categories.js
 
-const Category = require('../models/Category');
+const Category = require('../models/category');
 
 exports.getAllCategories = async (req, res) => {
   try {
