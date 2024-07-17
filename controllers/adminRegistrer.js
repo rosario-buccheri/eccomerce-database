@@ -1,5 +1,3 @@
-// controllers/auth.js
-
 exports.adminRegister = async (req, res) => {
   
     const errors = validationResult(req);
@@ -13,28 +11,27 @@ exports.adminRegister = async (req, res) => {
     
       const whitelist = process.env.ADMIN_EMAIL_WHITELIST.split(',');
       if (!whitelist.includes(email)) {
-        return res.status(403).json({ msg: 'Email not authorized for admin access' });
+        return res.status(403).json({ msg: 'Email non e autorizzata come admin' });
       }
   
     
       let admin = await User.findOne({ where: { email } });
       if (admin) {
-        return res.status(400).json({ msg: 'Admin user already exists' });
+        return res.status(400).json({ msg: 'utente amministratore esiste già' });
       }
   
       
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
   
-      // Create nuovo utente
       admin = await User.create({
         name,
         email,
         password: hashedPassword,
-        isAdmin: true,
+        role : "admin",
       });
   
-      res.json({ msg: 'Admin user registered successfully' });
+      res.json({ msg: 'Admin registrato correttamente' });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
