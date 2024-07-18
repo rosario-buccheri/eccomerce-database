@@ -13,8 +13,14 @@ exports.getAllCategories = async (req, res) => {
 exports.createCategory = async (req, res) => {
   const { name } = req.body;
   try {
-    const category = await Category.create({ name });
-    return res.status(200).json({ msg: 'Categoria creata', category });
+    const exitingCategory = await Category.findOne({where: {name}});
+    if (!exitingCategory) {
+      const category = await Category.create({ name });
+      return res.status(200).json({ msg: 'Categoria creata', category });
+    } else {
+      return res.status(400).json({ msg: 'Categoria già esistente' });
+    }
+    
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

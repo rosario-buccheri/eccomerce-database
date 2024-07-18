@@ -18,10 +18,6 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-const authenticateToken = (req, res, next) => {
-  // Logica per autenticare il token
-  next();
-};
+
 
 module.exports = authMiddleware;
-module.exports = authenticateToken;
