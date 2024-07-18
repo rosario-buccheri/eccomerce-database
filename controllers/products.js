@@ -1,11 +1,12 @@
 // controllers/categories.js
 
-const products = require('../models/product');
+const Product = require('../models/product');
 
-exports.getAllProducts = async (req, res) => {
+exports.getAllproducts = async (req, res) => {
+  console.log('getAllproducts')
   try {
-    const products = await products.findAll();
-    res.json(products);
+    const products = await Product.findByPk(1);
+    res.status(200).json(products);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -13,16 +14,22 @@ exports.getAllProducts = async (req, res) => {
 };
 // controllers/categories.js
 
-exports.createProducts = async (req, res) => {
+exports.createproducts = async (req, res) => {
     const { name } = req.body;
-  
     try {
       // Check if category already exists
-      let products = await products.findOne({ where: { name } });
-      if (products) {
+      let product = await Product.findOne({ where: { name } });
+      if (product) {
         return res.status(400).json({ msg: 'Products already exists' });
+      } else {
+         product = await Product.create(req.body);
+         if (product) {
+          res.status(200).json({ msg: 'Product created successful' });
+         } else {
+          res.status(400).json({ msg: 'Error creating product' });
+         }
       }
-    }catch(err) {
+    } catch(err) {
         console.error(err.message);
         res.status(500).send('Server Error');
 }

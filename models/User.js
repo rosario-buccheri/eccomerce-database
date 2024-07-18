@@ -1,7 +1,13 @@
 // models/User.js
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const User = sequelize.define('Users',{
+const User = sequelize.define('users',{
+  
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey:true
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false

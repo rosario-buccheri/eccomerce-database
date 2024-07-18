@@ -3,6 +3,11 @@ const sequelize = require('../config/database');
 
 // Definizione del modello Cart
 const Cart = sequelize.define('Cart', {
+  idCart: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey:true
+  },
   userId: {
     type: DataTypes.INTEGER,
     references: {
@@ -14,7 +19,7 @@ const Cart = sequelize.define('Cart', {
     type: DataTypes.INTEGER,
     references: {
       model: 'Products',
-      key: 'id'
+      key: 'idProducts'
     }
   },
   quantity: {

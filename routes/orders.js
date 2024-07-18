@@ -4,12 +4,12 @@ const { Order } = require('../models/order');
 const { Cart } = require('../models/cart');
 const { Product } = require('../models/product');
 const { authenticateToken } = require('../middleware/auth');
-const { getAllorders, storeorders, updateorders, deleteorders } = require('../controllers/orders');
+const { getOrders, createOrder, deleteorders } = require('../controllers/order');
 
-router.post('/orders', storeorders);
-router.put('/orders/:id', updateorders);
-router.get('/orders', getAllorders);
-router.delete('/orders', deleteorders);
+router.post('/orders', createOrder);
+//router.put('/orders/:id', updateorders);
+router.get('/orders', getOrders);
+//router.delete('/orders', deleteorders);
 
 
 module.exports = router;
