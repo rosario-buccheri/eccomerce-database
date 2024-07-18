@@ -9,7 +9,6 @@ const {register,login} = require('../controllers/auth')
 
 // Registrazione utente
 router.post('/register', register);
-
 //login
 router.post('/login', login);
 

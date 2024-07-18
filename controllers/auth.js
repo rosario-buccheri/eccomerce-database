@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
       }
 
       const token = jwt.sign({ user }, jwtSecret, {expiresIn: '30d'});
-      res.status(200).json({ message: 'Accesso effettuato' });
+      res.status(200).json({ message: 'Accesso effettuato', token });
       
     } catch (error) {
       console.error('Errore durante il login:', error);

@@ -10,6 +10,6 @@ router.post('/category', createCategory);
 router.put('/category/:id', updateCategory);
 
 // Route to get all categories
-router.get('/categories', getAllCategories);
+router.get('/category', getAllCategories);
 
 module.exports = router;
