@@ -12,15 +12,15 @@ exports.getCart = async (req, res) => {
 };
 
 exports.addToCart = async (req, res) => {
-  const { id } = req.params;
+  const { idProduct } = req.body;
 
   try {
-    const product = await Product.findByPk(id);
+    const product = await Product.findByPk(idProduct);
     if (!product) {
       return res.status(404).json({ msg: 'Product not found' });
     }
 
-    let cartItem = await Cart.findOne({ where: { productId: id } });
+    let cartItem = await Cart.findOne({ where: { productId: idProduct } });
 
     if (cartItem) {
       cartItem.quantity += 1;
