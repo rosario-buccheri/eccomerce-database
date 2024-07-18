@@ -3,6 +3,11 @@ const sequelize = require('../config/database');
 
 // Definizione del modello Order
 const Order = sequelize.define('Order', {
+  idOrders: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey:true
+  },
   userId: {
     type: DataTypes.INTEGER,
     references: {

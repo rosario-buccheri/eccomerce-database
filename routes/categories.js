@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken } = require('../middleware/auth');
-const { getAllcategory, storecategory, updatecategory, deletecategory } = require('../controllers/category');
-const authMiddleware = require('../middleware/auth');
+const { getAllCategories, createCategory, updateCategory } = require('../controllers/categories');
+//const { authenticateToken } = require('../middleware/auth');
 
-router.post('/category', storecategory);
-router.put('/category/:id', updatecategory);
-router.get('/category', getAllcategory);
-router.delete('/category', deletecategory);
+// Route to create a category
+router.post('/category', createCategory);
 
+// Route to update a category
+router.put('/category/:id', updateCategory);
+
+// Route to get all categories
+router.get('/categories', getAllCategories);
 
 module.exports = router;

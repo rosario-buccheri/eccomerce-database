@@ -1,31 +1,32 @@
-const { Sequelize, Model } = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'mysql' // o il tuo database
-});
+const { Model } = require('sequelize');
+const sequelize = require('../config/database');
 
-class Product extends Model {}
+const { DataTypes } = require('sequelize');
 
-Product.init({
+const Product = sequelize.define('Product', {
+  idProducts: { 
+    type: DataTypes.INTEGER.UNSIGNED,
+    primaryKey:true,
+    autoIncrement:true,
+  },
   name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   description: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   price: {
-    type: Sequelize.FLOAT,
+    type: DataTypes.FLOAT,
     allowNull: false
   },
   categoryId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   }
-}, {
-  sequelize,
-  modelName: 'product'
 });
 
-module.exports = { Product };
+module.exports = Product;
+
+
