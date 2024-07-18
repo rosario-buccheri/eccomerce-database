@@ -2,17 +2,25 @@
 
 const Product = require('../models/product');
 
-exports.getAllproducts = async (req, res) => {
-  console.log('getAllproducts')
+exports.getProductDetails = async (req, res) => {
   try {
-    const products = await Product.findByPk(1);
+    const productDetails = await Product.findOne({where: {idProducts: req.params.id}});
+    res.status(200).json(productDetails);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+exports.getAllproducts = async (req, res) => {
+  try {
+    const products = await Product.findAll();
     res.status(200).json(products);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 };
-// controllers/categories.js
 
 exports.createproducts = async (req, res) => {
     const { name } = req.body;
